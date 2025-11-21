@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kartesius Interactive</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #000000;
+      padding: 20px;
+    }
+    #app {
+      background: #eaeff2;
+      max-width: 600px;
+      margin: auto;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    button {
+      margin: 5px 0;
+      padding: 10px;
+      width: 100%;
+      border: none;
+      border-radius: 6px;
+      background: #b137c0;
+      color: #FADADD;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #FF66FF;
+    }
+  </style>
+</head>
+<body>
+  <div id="app"></div>
+
+  <script>
+    const app = document.getElementById("app");
+
+    function showWelcome() {
+      app.innerHTML = `
+        <h2>Selamat datang dalam pembelajaran kartesius</h2>
+        <p>Masukkan nama kamu:</p>
+        <input id="nama" placeholder="Nama kamu" />
+        <button onclick="start()">Lanjut</button>
+      `;
+    }
+
+    function start() {
+      const nama = document.getElementById("nama").value;
+      app.innerHTML = `
+        <h2>Halo bang/kak ${nama}!!</h2>
+        <p>Siap dak belajar Kartesius?</p>
+        <button onclick="menu('${nama}')">Iya</button>
+        <button onclick="malas()">Tidak</button>
+      `;
+    }
+
+    function malas() {
+      app.innerHTML = `<h2>Males belajar mau jadi apa 😡😡</h2>`;
+    }
+
+    function menu(nama) {
+      app.innerHTML = `
+        <h2>Menu Utama</h2>
+        <button onclick="pembelajaran()">Pembelajaran</button>
+        <button onclick="contohSoal()">Contoh Soal</button>
+        <button onclick="quiz('${nama}')">Quiz</button>
+      `;
+    }
+
+    function pembelajaran() {
+      app.innerHTML = `
+        <h2>Pembelajaran</h2>
+        <button onclick="sejarah()">1. Sejarah</button>
+        <button onclick="apaItu()">2. Apa itu kartesius?</button>
+        <button onclick="rumus()">3. Rumus</button>
+        <button onclick="showWelcome()">Kembali</button>
+      `;
+    }
+
+    function sejarah() {
+      app.innerHTML = `
+        <h2>Sejarah</h2>
+        <p>Kamu tahu ga? Kartesius pertama kali ditemukan sama oom gondrong bernama René Descartes pada abad ke-17.Dia memperkenalkan sistem koordinat Kartesius dalam karyanya yaitu La Géométrie pada tahun 1637.Penemuan ini menjadi revolusi dalam matematika karena menyediakan hubungan sistematis antara aljabar dan geometri, yang sebelumnya tidak ada.Menarik kan? Mau kembali ke menu pembelajaran?</p>
+        <button onclick="pembelajaran()">Kembali</button>
+      `;
+    }
+
+    function apaItu() {
+      app.innerHTML = `
+        <h2>Apa itu Kartesius?</h2>
+        <p>Koordinat kartesius merupakan jarak yang bertanda titik dari dua garis berorientasi tegak lurus tetap, diukur dalam satuan panjang yang sama. Setiap garis referensi disebut sumbu koordinat atau hanya sumbu (sumbu jamak) dari sistem, dan titik di mana mereka bertemu adalah asalnya, pada pasangan terurut (0,0). </p>
+        <button onclick="pembelajaran()">Kembali</button>
+      `;
+    }
+
+    function rumus() {
+      app.innerHTML = `
+        <h2>Rumus Kartesius</h2>
+        <p>d = √(x2 - x1)² + (y2 - y1)²</p>
+        <button onclick="pembelajaran()">Kembali</button>
+      `;
+    }
+
+    function contohSoal() {
+      app.innerHTML = `
+        <h2>Contoh Soal</h2>
+        <p>Diketahui titik A (2,3) dan B (6,7). Berapa jaraknya?</p>
+        <button onclick="jawab(1)">a. 4√2</button>
+        <button onclick="jawab(0)">b. 4√5</button>
+        <button onclick="jawab(0)">c. 4√10</button>
+        <button onclick="menu()">Kembali</button>
+      `;
+    }
+
+    function jawab(betul) {
+      if (betul) {
+        alert("Betul! Jawaban: 4√2");
+      } else {
+        alert("Kurang tepat. Jawaban yang benar: 4√2");
+      }
+    }
+
+    function quiz(nama) {
+      app.innerHTML = `
+        <h2>Quiz</h2>
+        <button onclick="quiz1('${nama}')">Level 1</button>
+        <button onclick="quiz2('${nama}')">Level 2</button>
+        <button onclick="quiz3('${nama}')">Level 3</button>
+      `;
+    }
+
+    function quiz1(nama) {
+      app.innerHTML = `
+        <h3>Level 1</h3>
+        <p>Diketahui A(1,2) dan B(4,6). Berapa jaraknya?</p>
+        <input id="ans1" placeholder="Jawaban" />
+        <button onclick="cek1('${nama}')">Kirim</button>
+      `;
+    }
+
+    function cek1(nama) {
+      const v = document.getElementById("ans1").value;
+      if (v == 5) {
+        app.innerHTML = `<h2>Pinter bangets you!</h2>`;
+      } else {
+        app.innerHTML = `<h2>Coba lagi ya!</h2>`;
+      }
+    }
+
+    // Level 2
+    function quiz2(nama) {
+      app.innerHTML = `
+        <h3>Level 2</h3>
+        <p>Titik M(-3,-2) dan N(1,2). Jaraknya?</p>
+        <input id="ans2" />
+        <button onclick="cek2('${nama}')">Kirim</button>
+      `;
+    }
+
+    function cek2(nama) {
+      const v = document.getElementById("ans2").value;
+      if (v == 5) app.innerHTML = `<h2>Bagus banget!!!</h2>`;
+      else app.innerHTML = `<h2>Pelajari lagi ya!</h2>`;
+    }
+
+    // Level 3
+    function quiz3(nama) {
+      app.innerHTML = `
+        <h3>Level 3</h3>
+        <p>A(2,1), B(x,5), jarak 5 satuan. Berapa x?</p>
+        <input id="ans3" />
+        <button onclick="cek3('${nama}')">Kirim</button>
+      `;
+    }
+
+    function cek3(nama) {
+      const v = document.getElementById("ans3").value;
+      if (v == -1 || v == 5) {
+        app.innerHTML = `<h2>Nice bangetttt! Selesai belajar, ${nama}!</h2>`;
+      } else {
+        app.innerHTML = `<h2>Nyaris banget, pelajari lagi ya!</h2>`;
+      }
+    }
+
+    showWelcome();
+  </script>
+</body>
+</html>
